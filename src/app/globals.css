@@ -1,26 +1,18 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply min-h-screen text-gray-100;
   }
-}
+  
+  /* The Sleek Minimalist Terminal Vibe */
+  .dark body {
+    @apply bg-[#0a0a0a];
+  }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* The Vibrant SaaS Glassmorphism Vibe */
+  .saas body {
+    @apply bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500;
+    background-attachment: fixed;
+  }
 }
