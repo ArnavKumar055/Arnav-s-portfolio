@@ -46,27 +46,27 @@ export default function Home() {
       description:
         "A comprehensive Learning Management System designed to streamline educational workflows. Features secure student authentication, organized resource distribution, and video lecture archiving.",
       tech: ["MongoDB", "Express", "React", "Node.js", "Tailwind CSS"],
-      live: "https://envirr.com", // Replace with your actual live link
-      github: "https://github.",
+      live: "https://envirr-institute.vercel.app/", 
+      github: "https://github.com/ArnavKumar055/Envirr-Institute",
       type: "Full-Stack",
     },
+   // {
+     // title: "Community Matchmaking Application",
+      //description:
+      //  "A niche matrimonial platform tailored for specialized community matchmaking. Built with complex registration pipelines, multi-step verification forms, and robust relational database structures.",
+      //tech: ["MongoDB", "Express", "React", "Node.js", "Redux Toolkit"],
+      //live: "https://vercel.app",
+      //github: "https://github.",
+      //type: "Backend Focus",
+    //},
     {
-      title: "Community Matchmaking Application",
+      title: "Scientefic Calculator Web App",
       description:
-        "A niche matrimonial platform tailored for specialized community matchmaking. Built with complex registration pipelines, multi-step verification forms, and robust relational database structures.",
-      tech: ["MongoDB", "Express", "React", "Node.js", "Redux Toolkit"],
-      live: "https://vercel.app",
-      github: "https://github.",
-      type: "Backend Focus",
-    },
-    {
-      title: "Physics-Based Arcade Mobile Game",
-      description:
-        "An interactive mobile game clone featuring custom velocity tracking, collision bounds, and high-score states. Developed using client-side game loops and mobile native wrappers.",
-      tech: ["JavaScript", "Phaser 3", "Capacitor", "HTML5 Canvas"],
-      live: "https://vercel.app",
-      github: "https://github.",
-      type: "Gaming / Mobile",
+        "A web app for various calculations including graphing, expression expansion and simplification, etc. Also, an EMI and SIP calculator and a live currency convertor which refreshes every hour.",
+      tech: ["JavaScript", "TypeScript", "HTML5 Canvas", "Tailwind CSS"],
+      live: "https://sc-calculator.vercel.app/",
+      github: "https://github.com/ArnavKumar055/SC-Calculator",
+      type: "Client-Side (SPA)",
     },
   ];
 
