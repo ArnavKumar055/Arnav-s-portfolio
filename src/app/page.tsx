@@ -2,14 +2,24 @@
 
 import { useTheme } from "@/app/providers"; // Updated import path
 import ThemeSwitcher from "@/components/ThemeSwitcher";
-import { ExternalLink, Mail, Code2, GraduationCap, Briefcase, Download, Sparkles } from "lucide-react";
+import {
+  ExternalLink,
+  Mail,
+  Code2,
+  GraduationCap,
+  Briefcase,
+  Download,
+  Sparkles,
+} from "lucide-react";
 import { useEffect, useState } from "react"; // Added hooks for hydration guard
 
 export default function Home() {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [formStatus, setFormStatus] = useState<
+    "IDLE" | "SUBMITTING" | "SUCCESS" | "ERROR"
+  >("IDLE"); // Add this state
 
-  // Set mounted to true once the browser fully loads the client script
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -46,17 +56,17 @@ export default function Home() {
       description:
         "A comprehensive Learning Management System designed to streamline educational workflows. Features secure student authentication, organized resource distribution, and video lecture archiving.",
       tech: ["MongoDB", "Express", "React", "Node.js", "Tailwind CSS"],
-      live: "https://envirr-institute.vercel.app/", 
+      live: "https://envirr-institute.vercel.app/",
       github: "https://github.com/ArnavKumar055/Envirr-Institute",
     },
-   // {
-     // title: "Community Matchmaking Application",
-      //description:
-      //  "A niche matrimonial platform tailored for specialized community matchmaking. Built with complex registration pipelines, multi-step verification forms, and robust relational database structures.",
-      //tech: ["MongoDB", "Express", "React", "Node.js", "Redux Toolkit"],
-      //live: "https://vercel.app",
-      //github: "https://github.",
-      //type: "Backend Focus",
+    // {
+    // title: "Community Matchmaking Application",
+    //description:
+    //  "A niche matrimonial platform tailored for specialized community matchmaking. Built with complex registration pipelines, multi-step verification forms, and robust relational database structures.",
+    //tech: ["MongoDB", "Express", "React", "Node.js", "Redux Toolkit"],
+    //live: "https://vercel.app",
+    //github: "https://github.",
+    //type: "Backend Focus",
     //},
     {
       title: "Scientefic Calculator Web App",
@@ -208,9 +218,7 @@ export default function Home() {
               <h4 className="text-white font-semibold">
                 Bachelor of Computer Applications (BCA)
               </h4>
-              <p className="text-sm opacity-80">
-                Ongoing Academic Matrix
-              </p>
+              <p className="text-sm opacity-80">Ongoing Academic Matrix</p>
             </div>
           </div>
         </div>
@@ -254,35 +262,103 @@ export default function Home() {
           builds clean full-stack products.
         </p>
 
-        <form
-          className="space-y-4 text-left"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <input
-            type="text"
-            placeholder="Your Name"
-            className={`w-full p-3 bg-black/20 border text-white placeholder-zinc-500 focus:outline-none transition-all
-              ${isSaas ? "border-white/20 rounded-xl focus:border-white/50 bg-white/5" : "border-zinc-800 rounded-md focus:border-zinc-500"}`}
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            className={`w-full p-3 bg-black/20 border text-white placeholder-zinc-500 focus:outline-none transition-all
-              ${isSaas ? "border-white/20 rounded-xl focus:border-white/50 bg-white/5" : "border-zinc-800 rounded-md focus:border-zinc-500"}`}
-          />
-          <textarea
-            placeholder="Your Message"
-            rows={4}
-            className={`w-full p-3 bg-black/20 border text-white placeholder-zinc-500 focus:outline-none transition-all
-              ${isSaas ? "border-white/20 rounded-xl focus:border-white/50 bg-white/5" : "border-zinc-800 rounded-md focus:border-zinc-500"}`}
-          />
-          <button
-            type="submit"
-            className={styles.primaryBtn + " w-full justify-center"}
+        {/* Render a success message if the email sent successfully */}
+        {formStatus === "SUCCESS" ? (
+          <div
+            className={`p-6 border text-center ${
+              isSaas
+                ? "bg-white/10 border-white/30 rounded-2xl text-white backdrop-blur-md shadow-lg"
+                : "bg-zinc-900 border-zinc-800 rounded-md text-zinc-100 font-mono"
+            }`}
           >
-            Send Transmission
-          </button>
-        </form>
+            <h3 className="text-xl font-bold mb-2">Transmission Received!</h3>
+            <p className="text-sm opacity-80">
+              Thank you for reaching out. I'll get back to your inbox as quickly
+              as possible.
+            </p>
+            <button
+              onClick={() => setFormStatus("IDLE")}
+              className="mt-4 text-xs underline opacity-60 hover:opacity-100 block mx-auto"
+            >
+              Send another message
+            </button>
+          </div>
+        ) : (
+          <form
+            className="space-y-4 text-left"
+            onSubmit={async (e) => {
+              e.preventDefault();
+
+              // Fix: Cache the form element reference immediately while it still exists!
+              const form = e.currentTarget;
+              setFormStatus("SUBMITTING");
+
+              const formData = new FormData(form);
+
+              const response = await fetch(
+                "https://formspree.io/f/mjgnbzjw",
+                {
+                  method: "POST",
+                  body: formData,
+                  headers: {
+                    Accept: "application/json",
+                  },
+                },
+              );
+
+              if (response.ok) {
+                form.reset(); // Use the cached reference safely here
+                setFormStatus("SUCCESS");
+              } else {
+                setFormStatus("ERROR");
+              }
+            }}
+          >
+            <input
+              type="text"
+              name="name"
+              required
+              placeholder="Your Name"
+              className={`w-full p-3 bg-black/20 border text-white placeholder-zinc-500 focus:outline-none transition-all
+                ${isSaas ? "border-white/20 rounded-xl focus:border-white/50 bg-white/5" : "border-zinc-800 rounded-md focus:border-zinc-500"}`}
+            />
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="Your Email"
+              className={`w-full p-3 bg-black/20 border text-white placeholder-zinc-500 focus:outline-none transition-all
+                ${isSaas ? "border-white/20 rounded-xl focus:border-white/50 bg-white/5" : "border-zinc-800 rounded-md focus:border-zinc-500"}`}
+            />
+            <textarea
+              name="message"
+              required
+              placeholder="Your Message"
+              rows={4}
+              className={`w-full p-3 bg-black/20 border text-white placeholder-zinc-500 focus:outline-none transition-all
+                ${isSaas ? "border-white/20 rounded-xl focus:border-white/50 bg-white/5" : "border-zinc-800 rounded-md focus:border-zinc-500"}`}
+            />
+
+            {formStatus === "ERROR" && (
+              <p className="text-red-400 text-xs font-mono">
+                Oops! Something went wrong. Please try again.
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={formStatus === "SUBMITTING"}
+              className={
+                styles.primaryBtn +
+                " w-full justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+              }
+            >
+              {formStatus === "SUBMITTING"
+                ? "Transmitting..."
+                : "Send Transmission"}
+            </button>
+          </form>
+        )}
       </section>
     </main>
   );
