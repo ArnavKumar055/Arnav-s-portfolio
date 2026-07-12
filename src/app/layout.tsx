@@ -6,7 +6,7 @@ import { Providers } from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Arnav Kumar | Full-Stack Developer",
+  title: "Arnav Kumar | Web Developer",
   description:
     "Portfolio of Arnav Kumar, MERN Stack Developer building high-performance web applications.",
 };

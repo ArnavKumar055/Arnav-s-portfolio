@@ -48,7 +48,6 @@ export default function Home() {
       tech: ["MongoDB", "Express", "React", "Node.js", "Tailwind CSS"],
       live: "https://envirr-institute.vercel.app/", 
       github: "https://github.com/ArnavKumar055/Envirr-Institute",
-      type: "Full-Stack",
     },
    // {
      // title: "Community Matchmaking Application",
