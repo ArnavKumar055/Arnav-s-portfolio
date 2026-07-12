@@ -209,7 +209,7 @@ export default function Home() {
                 Bachelor of Computer Applications (BCA)
               </h4>
               <p className="text-sm opacity-80">
-                IGNOU — Ongoing Academic Matrix
+                Ongoing Academic Matrix
               </p>
             </div>
           </div>
